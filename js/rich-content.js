@@ -20,7 +20,6 @@
       if(node.tagName==='CITE')el.className='quote-source';
       for(const prop of ['color','backgroundColor'])if(colors.test(node.style[prop]))el.style[prop]=node.style[prop];
       if(['left','center','right'].includes(node.style.textAlign))el.style.textAlign=node.style.textAlign;
-      if(/^(12|28|64)px$/.test(node.style.marginBottom))el.style.marginBottom=node.style.marginBottom;
       if(/^(bold|normal|[1-9]00)$/.test(node.style.fontWeight))el.style.fontWeight=node.style.fontWeight;
       if(['italic','normal'].includes(node.style.fontStyle))el.style.fontStyle=node.style.fontStyle;
       if(/^(underline|line-through|none)$/.test(node.style.textDecorationLine))el.style.textDecorationLine=node.style.textDecorationLine;
@@ -58,8 +57,6 @@
         if(block.highlight){const mark=document.createElement('mark');while(el.firstChild)mark.append(el.firstChild);el.append(mark);}
       }
       if(['left','center','right'].includes(block.align))el.style.textAlign=block.align;
-      // Preserve the old article's paragraph spacing when opening it for the first time.
-      el.style.marginBottom=block.spacing==='wide'?'64px':block.spacing==='compact'?'12px':'28px';
       root.append(el);
     }
     return root;

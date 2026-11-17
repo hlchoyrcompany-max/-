@@ -6,3 +6,8 @@
 :where(.rich-editor,.post-body) blockquote.quote-line{border:0;border-left:3px solid #555;padding:8px 20px;margin:32px 0;background:transparent}
 :where(.rich-editor,.post-body) blockquote.quote-box{border:1px solid #e1e3e5;background:#f7f8f9;border-radius:4px;padding:24px;margin:32px 0}
 :where(.rich-editor,.post-body) .quote-text{margin:0!important;white-space:pre-wrap}:where(.rich-editor,.post-body) cite.quote-source{display:block;margin-top:16px;font-family:"Malgun Gothic",sans-serif;font-size:12px;font-style:normal;color:#888}
+
+/* Enter creates one ordinary line; paragraph gaps are explicit blank lines. */
+.rich-editor,.post-body .content-block.rich-document{line-height:1.6;white-space:pre-wrap}
+.rich-editor p,.rich-editor div,.post-body .rich-document p,.post-body .rich-document div{margin-top:0!important;margin-bottom:0!important;line-height:inherit}
+.rich-editor p:empty,.rich-editor div:empty,.post-body .rich-document p:empty,.post-body .rich-document div:empty{min-height:1.6em}

@@ -25,7 +25,7 @@
         el=document.createElement(block.type==='heading'?'h2':block.type==='quote'?'blockquote':'p');
         for(const segment of core.textSegments(block.text,block.boldRanges)){if(segment.bold){const strong=document.createElement('strong');strong.textContent=segment.text;el.append(strong);}else el.append(document.createTextNode(segment.text));}
       }else continue;
-      el.className='content-block '+block.type;
+      el.className='content-block '+block.type+(typeof block.html==='string'?' rich-document':'');
       if(['left','center','right'].includes(block.align))el.style.textAlign=block.align;
       if(block.bold===true)el.classList.add('text-bold');
       if(block.color==='red')el.classList.add('text-red');
