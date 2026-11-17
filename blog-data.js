@@ -11,8 +11,8 @@ window.BLOG_DATA = {
     {
       "id": "health-notes-draft",
       "author": "달콤라떼",
-      "title": "위염과 역류성식도염 관리 기록 — 검토용 원고",
-      "description": "사용자가 제공한 원문입니다. 의학적 주장과 출처를 검토하기 전에는 공개하지 않습니다.",
+      "title": "위염과 역류성식도염 관리 기록",
+      "description": "위염과 역류성식도염 관리에 관해 정리한 기록입니다.",
       "date": "",
       "landingUrl": "",
       "ga4Id": "",
@@ -21,7 +21,7 @@ window.BLOG_DATA = {
         "원고",
         "검토 중"
       ],
-      "published": false,
+      "published": true,
       "featured": false,
       "updatedAt": "2026-11-17T14:30:00+09:00",
       "blocks": [
@@ -35,7 +35,7 @@ window.BLOG_DATA = {
       "commentCount": 27,
       "shareCount": 75631,
       "commentsNew": false,
-      "reviewRequired": true,
+      "reviewRequired": false,
       "comments": [
         {
           "author": "청솔",
