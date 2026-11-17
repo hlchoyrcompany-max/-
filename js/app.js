@@ -23,7 +23,13 @@
       }else if(['paragraph','heading','quote'].includes(block.type)){
         el=document.createElement(block.type==='heading'?'h2':block.type==='quote'?'blockquote':'p');el.textContent=block.text||'';
       }else continue;
-      el.className='content-block '+block.type;fragment.append(el);
+      el.className='content-block '+block.type;
+      if(['left','center','right'].includes(block.align))el.style.textAlign=block.align;
+      if(block.bold===true)el.classList.add('text-bold');
+      if(block.color==='red')el.classList.add('text-red');
+      if(block.highlight===true&&['paragraph','heading','quote'].includes(block.type)){el.classList.add('text-highlight');const mark=document.createElement('mark');mark.textContent=el.textContent;el.replaceChildren(mark);}
+      if(['compact','wide'].includes(block.spacing))el.classList.add('spacing-'+block.spacing);
+      fragment.append(el);
     }
     byId('article').replaceChildren(fragment);
     byId('reviewNotice').hidden=current.reviewRequired!==true;
@@ -88,9 +94,13 @@
   menuSheet.addEventListener('click',event=>{if(event.target===menuSheet){const rect=menuSheet.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)closeMenu();}});
   const requestedPost=new URLSearchParams(location.search).get('post');
   const blogPosts=window.BLOG_DATA?.posts||[];
-  const post=requestedPost?window.BlogCore.getPost(blogPosts,requestedPost):window.BlogCore.visible(blogPosts)[0];
-  render(post||{author:'',title:'글을 찾을 수 없습니다.',blocks:[{type:'paragraph',text:'삭제되었거나 공개되지 않은 글입니다. 상단의 블로그 이름을 눌러 홈으로 돌아가세요.'}]});
-  if(preview)window.addEventListener('message',e=>{if(e.source!==parent||e.origin!==location.origin||e.data?.type!=='landing-preview')return;render(e.data.config);});
+  const localPreview=preview&&(location.protocol==='file:'||['127.0.0.1','localhost','[::1]'].includes(location.hostname));
+  const post=requestedPost?(localPreview?blogPosts.find(p=>p.id===requestedPost):window.BlogCore.getPost(blogPosts,requestedPost)):window.BlogCore.visible(blogPosts)[0];
+  render(post||{author:'',title:'글을 찾을 수 없습니다.',blocks:[{type:'paragraph',text:'삭제되었거나 공개되지 않은 글입니다. 하단 홈 메뉴를 눌러 돌아가세요.'}]});
+  if(preview){
+    window.addEventListener('message',e=>{if(!((parent!==window&&e.source===parent)||(window.opener&&e.source===window.opener))||e.origin!==location.origin||e.data?.type!=='landing-preview')return;render(e.data.config);});
+    if(window.opener)window.opener.postMessage({type:'landing-preview-ready'},location.origin==='null'?'*':location.origin);
+  }
   // 선택 설정: 본인 GA4 ID를 넣은 경우에만 통계를 시작합니다.
   const gaId=String(current.ga4Id||'').trim();
   if(!preview&&/^G-[A-Z0-9]+$/.test(gaId)){

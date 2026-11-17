@@ -6,6 +6,7 @@
   const utm={utm_source:'instagram',utm_medium:'social',utm_campaign:'journal',utm_content:'story_01',utm_term:'',utm_id:''};
   function notify(msg){$('editorStatus').textContent=msg;$('editorStatus').hidden=false;clearTimeout(statusTimer);statusTimer=setTimeout(()=>$('editorStatus').hidden=true,4500);}
   function field(parent,label,value,callback,multiline=false){const wrap=document.createElement('label');wrap.append(document.createTextNode(label));const input=document.createElement(multiline?'textarea':'input');if(multiline)input.rows=4;else input.type='text';input.value=value||'';input.addEventListener('input',()=>callback(input.value));wrap.append(input);parent.append(wrap);return input;}
+  function optionField(parent,label,value,choices,onChange){const wrap=document.createElement('label');wrap.textContent=label;const select=document.createElement('select');for(const [key,name] of choices){const option=document.createElement('option');option.value=key;option.textContent=name;option.selected=key===value;select.append(option);}select.addEventListener('change',()=>onChange(select.value));wrap.append(select);parent.append(wrap);}
   function preview(){const f=$('preview');f.contentWindow?.postMessage({type:'landing-preview',config},location.origin==='null'?'*':location.origin);updateUtm();}
   function download(name,text,type='text/javascript;charset=utf-8'){const blob=new Blob([text],{type});downloadBlob(name,blob);}
   function downloadBlob(name,blob){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
@@ -33,7 +34,16 @@
         field(box,'이미지 주소 또는 파일 경로',block.src,v=>{block.src=v;preview();});field(box,'이미지 설명 (대체 텍스트)',block.alt,v=>{block.alt=v;preview();});field(box,'사진 아래 설명 (선택)',block.caption,v=>{block.caption=v;preview();});
         const pick=document.createElement('label');pick.textContent='내 PC 이미지 선택 → 파일 사본 다운로드';const file=document.createElement('input');file.type='file';file.accept='image/jpeg,image/png,image/webp,image/gif';
         file.addEventListener('change',()=>{const selected=file.files[0];if(!selected)return;if(!['image/jpeg','image/png','image/webp','image/gif'].includes(selected.type)){notify('JPG, PNG, WEBP, GIF 파일을 선택하세요.');return;}const ext={ 'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'}[selected.type];const name='photo-'+Date.now()+'.'+ext;downloadBlob(name,selected);block.src='assets/images/'+name;drawBlocks();preview();notify('다운로드한 이미지를 assets/images 폴더에 넣어야 미리보기에 표시됩니다.');});pick.append(file);box.append(pick);
-      }else if(block.type!=='divider')field(box,'내용',block.text,v=>{block.text=v;preview();},true);
+      }else if(block.type!=='divider'){
+        field(box,'내용',block.text,v=>{block.text=v;preview();},true);
+        const format=document.createElement('div');format.className='block-format';
+        optionField(format,'정렬',block.align||(block.type==='quote'?'center':'left'),[['left','왼쪽'],['center','가운데'],['right','오른쪽']],v=>{block.align=v;preview();});
+        optionField(format,'글자',block.bold?'bold':'normal',[['normal','기본'],['bold','굵게']],v=>{block.bold=v==='bold';preview();});
+        optionField(format,'색상',block.color||'default',[['default','기본'],['red','빨강']],v=>{block.color=v;preview();});
+        optionField(format,'형광펜',block.highlight?'yes':'no',[['no','없음'],['yes','노랑']],v=>{block.highlight=v==='yes';preview();});
+        optionField(format,'문단 아래 간격',block.spacing||'normal',[['compact','좁게'],['normal','기본'],['wide','넓게']],v=>{block.spacing=v;preview();});
+        box.append(format);
+      }
       $('blocks').append(box);
     });
   }
@@ -41,6 +51,13 @@
   function updateUtm(){try{$('utmOutput').value=core.buildUtm(config.landingUrl,utm);$('utmError').textContent='';}catch(e){$('utmOutput').value='';$('utmError').textContent='기본 정보에 배포된 랜딩 URL을 먼저 입력하세요.';}}
   function valid(candidate){return candidate&&typeof candidate==='object'&&Array.isArray(candidate.blocks)&&candidate.blocks.every(b=>b&&Object.hasOwn(labels,b.type));}
   $('preview').addEventListener('load',preview);
+  $('openPostPreview')?.addEventListener('click',()=>{
+    const opened=window.open('post.html?preview=1&post='+encodeURIComponent(config.id),'_blank');
+    if(!opened){notify('팝업 차단을 해제하면 게시글 화면을 새 창에서 볼 수 있습니다.');return;}
+    const snapshot=JSON.parse(JSON.stringify(config));
+    const receive=e=>{if(e.source!==opened||e.origin!==location.origin||e.data?.type!=='landing-preview-ready')return;opened.postMessage({type:'landing-preview',config:snapshot},location.origin==='null'?'*':location.origin);window.removeEventListener('message',receive);};
+    window.addEventListener('message',receive);setTimeout(()=>window.removeEventListener('message',receive),30000);
+  });
   document.querySelectorAll('[data-add]').forEach(button=>button.addEventListener('click',()=>{const type=button.dataset.add;config.blocks.push(type==='image'?{type,src:'assets/images/placeholder.svg',alt:'',caption:''}:type==='divider'?{type}:{type,text:''});drawBlocks();preview();}));
   $('export').addEventListener('click',()=>{if(!blog.valid(catalog)||!catalog.posts.every(valid)){notify('글 ID는 중복 없이 영문 소문자·숫자·하이픈으로 입력하세요.');return;}download('blog-data.js',blog.serialize(catalog));notify('blog-data.js를 프로젝트 폴더에 덮어쓰고 재배포하세요. 모든 글이 포함됩니다.');});
   $('saveDraft').addEventListener('click',()=>{try{localStorage.setItem(draftKey,JSON.stringify(catalog));notify('블로그 전체 초안을 현재 브라우저에 저장했습니다. 공개 페이지에는 반영되지 않습니다.');}catch{notify('브라우저 저장소를 사용할 수 없습니다. 파일로 다운로드하세요.');}});
