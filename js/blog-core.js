@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
   const boards=['전체글','인기글','자유게시판','후기','공지'];
-  function visible(posts){return (Array.isArray(posts)?posts:[]).filter(p=>p&&p.published===true);}
+  function visible(posts){return (Array.isArray(posts)?posts:[]).filter(p=>p&&p.published===true&&p.reviewRequired!==true);}
   function filterPosts(posts,board='전체글',query=''){
     const q=String(query).trim().toLocaleLowerCase();
     return visible(posts).filter(p=>(board==='전체글'||(board==='인기글'?p.featured===true:p.category===board))&&(!q||[p.title,p.description,p.author,...(Array.isArray(p.tags)?p.tags:[])].join(' ').toLocaleLowerCase().includes(q))).sort((a,b)=>(Date.parse(b.updatedAt)||0)-(Date.parse(a.updatedAt)||0));

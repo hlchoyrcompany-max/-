@@ -23,6 +23,7 @@
 <div class="info"><div class="name" id="author">오늘의 기록</div><div class="date" id="date"></div></div>
 </div>
 <hr class="post-title-divider"/>
+<aside class="review-notice" id="reviewNotice" hidden><strong>미검토 원고 · 편집용 미리보기</strong><p>사용자 제공 원문을 보존한 초안입니다. 의학적 오류와 치료 효과·처방약 관련 주장이 검증되지 않았습니다. 식품으로 치료를 대체하거나 처방약을 임의로 중단하지 마세요.</p><a href="https://www.niddk.nih.gov/health-information/digestive-diseases/gastritis-gastropathy" target="_blank" rel="noopener">위염 안내</a> · <a href="https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/treatment" target="_blank" rel="noopener">역류질환 치료 안내</a></aside>
 <article aria-label="게시글 본문" class="post-body" id="article"></article>
 
 <div class="post-feedback" aria-label="글 반응">
@@ -30,7 +31,7 @@
 <div class="feedback-group"><a class="feedback-main" href="#comments"><svg class="feedback-comment-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M20 10.5c0 4.2-3.6 7.5-8 7.5h-1l-4 3v-4C4.6 15.8 3 13.3 3 10.5 3 6.4 6.8 3 11.5 3S20 6.4 20 10.5Z" stroke="currentColor" stroke-width="1.2"/><path d="M7 10h1m3 0h1m3 0h1" stroke="currentColor" stroke-linecap="round"/></svg> 댓글 <span id="commentCount">0</span><span class="feedback-new" id="commentNew" hidden>NEW</span></a></div>
 <div class="feedback-group"><button class="feedback-main" id="shareBottom" type="button"><span aria-hidden="true">↗</span> 공유 <span id="shareCount">0</span></button></div>
 </div>
-<section aria-labelledby="commentsTitle" class="comment-section landing-comments" id="comments" tabindex="-1"><h2 id="commentsTitle">댓글 <span>0</span></h2><p>아직 등록된 댓글이 없습니다.</p><p class="comments-note">댓글 작성 기능은 준비 중입니다.</p></section>
+<section aria-labelledby="commentsTitle" class="comment-section landing-comments" id="comments" tabindex="-1"><h2 id="commentsTitle">댓글 <span>0</span></h2><p id="commentsStatus">아직 등록된 댓글이 없습니다.</p><p class="comments-note" id="commentsNotice">댓글 작성 기능은 준비 중입니다.</p><div id="commentThreads"></div></section>
 <nav aria-label="하단 메뉴" class="bottom-nav">
 <a aria-label="블로그 홈" class="bn-item" href="index.html"><span aria-hidden="true" class="ico"><svg fill="none" viewbox="0 0 28 28"><path d="M4 11 14 4l10 7v14H4Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"></path></svg></span><span>홈</span></a>
 <button aria-controls="menuSheet" aria-haspopup="dialog" class="bn-item" id="topicsNav" type="button"><span aria-hidden="true" class="ico">★</span><span>주제</span></button>

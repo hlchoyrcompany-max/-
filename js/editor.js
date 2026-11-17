@@ -21,7 +21,8 @@
     const notice=document.createElement('p');notice.className='hint';notice.textContent='직접 지정한 표시 수치입니다. 서버에서 집계하는 실제 통계와 연동되어 있지 않습니다.';$('settings').append(notice);
     const newLabel=document.createElement('label');newLabel.className='check';const newCheck=document.createElement('input');newCheck.type='checkbox';newCheck.checked=config.commentsNew===true;newCheck.addEventListener('change',()=>{config.commentsNew=newCheck.checked;preview();});newLabel.append(newCheck,document.createTextNode('댓글 옆 NEW 표시'));$('settings').append(newLabel);
     for(const [key,label] of settings)field($('settings'),label,config[key],v=>{config[key]=v;if(key==='title')drawPostPicker();preview();});
-    $('published').checked=config.published===true;$('featured').checked=config.featured===true;
+    $('published').checked=config.published===true;$('published').disabled=config.reviewRequired===true;$('published').title=config.reviewRequired?'검토가 필요한 원고는 초안으로만 저장합니다.':'';$('featured').checked=config.featured===true;
+    if(config.reviewRequired){const review=document.createElement('p');review.className='hint';review.textContent='원문 보존용 초안입니다. 의학적 주장과 출처를 검토하기 전에는 공개 목록에 표시하지 않습니다.';$('settings').append(review);}
   }
   const labels={paragraph:'문단',heading:'소제목',quote:'인용문',image:'이미지',divider:'구분선'};
   function drawBlocks(){

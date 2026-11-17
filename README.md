@@ -70,7 +70,17 @@ UTM은 주소 정보이며 통계 저장 도구가 아닙니다. 선택한 글�
 
 댓글 메뉴는 글 하단으로 이동합니다. 서버 댓글 작성·회원가입·인증은 아직 연결하지 않았습니다. 이전의 글 주소는 내용 정리 과정에서 first-post로 변경했으므로 기존 공유 링크를 사용한다면 새 주소로 바꿔 주세요.
 
-## 확인
+## 검토용 원고와 예시 댓글
+
+첨부 원문은 health-notes-draft 글에 보존했습니다. 편집실에서 선택해 확인할 수 있습니다. 위염·역류질환의 정의 혼동과 식품의 치료 효과, 처방약 대체 주장, 인용 출처는 검토가 필요하여 공개 목록에 포함하지 않았습니다. reviewRequired=true인 원고는 공개 체크 여부와 관계없이 목록·일반 글 URL에 표시되지 않습니다.
+
+원고에는 독자 질문 16개와 작성자 답글 16개로 총 32개의 예시 댓글을 넣었습니다. 모두 예시 배지가 붙으며 실제 독자 후기나 치료 경험이 아닙니다. 본문의 comments 배열에서 author, text, replies를 수정할 수 있습니다. isAuthor=true는 작성자 배지를 표시하며, 날짜가 있는 실제 자료는 date 필드로 표시할 수 있습니다. 예시에는 실제 방문자 사진·날짜·복용 경험을 꾸며 넣지 않았습니다.
+
+답글 버튼은 이미 입력된 작성자 답글을 펼치거나 접습니다. 서버 글쓰기·신고·실제 반응 집계 기능은 제공하지 않습니다. 댓글 자료가 있으면 댓글 수는 답글을 포함한 실제 자료 수로 표시합니다.
+
+의학 검토 참고: [위염 안내](https://www.niddk.nih.gov/health-information/digestive-diseases/gastritis-gastropathy), [역류질환 치료 안내](https://www.niddk.nih.gov/health-information/digestive-diseases/acid-reflux-ger-gerd-adults/treatment).
+
+## 검증
 
 ```powershell
 node --test tests/core.test.cjs tests/blog.test.cjs

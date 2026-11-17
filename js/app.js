@@ -26,16 +26,38 @@
       el.className='content-block '+block.type;fragment.append(el);
     }
     byId('article').replaceChildren(fragment);
+    byId('reviewNotice').hidden=current.reviewRequired!==true;
+    renderComments();
     renderCounts();
 
   }
   function count(value){return Math.min(Number.MAX_SAFE_INTEGER-1,Math.max(0,Math.floor(Number(value)||0)));}
+  function commentTotal(){return (Array.isArray(current.comments)?current.comments:[]).reduce((n,c)=>n+1+(Array.isArray(c.replies)?c.replies.length:0),0);}
+  function renderComments(){
+    const root=byId('commentThreads');root.replaceChildren();
+    const comments=Array.isArray(current.comments)?current.comments:[];
+    function makeComment(comment,isReply=false){
+      const article=document.createElement('article');article.className='reader-comment'+(isReply?' reader-comment-reply':'');
+      const header=document.createElement('div');header.className='reader-comment-header';const avatar=document.createElement('span');avatar.className='reader-avatar';avatar.textContent=(comment.author||'?').slice(0,1);avatar.setAttribute('aria-hidden','true');const author=document.createElement('strong');author.textContent=comment.author||'작성자';header.append(avatar,author);
+      if(comment.isAuthor){const badge=document.createElement('span');badge.className='comment-author-badge';badge.textContent='작성자';header.append(badge);}
+      if(comment.isExample||current.commentsAreExamples){const badge=document.createElement('span');badge.className='comment-example-badge';badge.textContent='예시';header.append(badge);}
+      const body=document.createElement('p');body.className='reader-comment-text';body.textContent=comment.text||'';article.append(header,body);
+      if(comment.date){const date=document.createElement('div');date.className='reader-comment-date';date.textContent=comment.date;article.append(date);}
+      const actions=document.createElement('div');actions.className='reader-comment-actions';const likes=document.createElement('span');likes.className='reader-comment-like';likes.textContent='♡ '+count(comment.likes);likes.setAttribute('aria-label','공감 '+count(comment.likes));
+      if(!isReply&&Array.isArray(comment.replies)&&comment.replies.length){const replies=document.createElement('div');replies.className='reader-replies';const replyButton=document.createElement('button');replyButton.type='button';replyButton.className='reader-reply-button';replyButton.textContent='답글 '+comment.replies.length;replyButton.setAttribute('aria-expanded','true');replyButton.addEventListener('click',()=>{replies.hidden=!replies.hidden;replyButton.setAttribute('aria-expanded',String(!replies.hidden));});actions.append(replyButton);comment.replies.forEach(reply=>replies.append(makeComment(reply,true)));actions.append(likes);article.append(actions,replies);}else{actions.append(likes);article.append(actions);}
+      return article;
+    }
+    comments.forEach(comment=>root.append(makeComment(comment)));
+  }
   function renderCounts(){
+    const total=commentTotal();const shownCount=total||count(current.commentCount);
     byId('likeCount').textContent=count(current.likeCount).toLocaleString();
-    byId('commentCount').textContent=count(current.commentCount).toLocaleString();
+    byId('commentCount').textContent=shownCount.toLocaleString();
     byId('shareCount').textContent=count(current.shareCount).toLocaleString();
-    byId('commentsTitle').querySelector('span').textContent=count(current.commentCount).toLocaleString();
-    byId('comments').querySelector('p').textContent=count(current.commentCount)>0?'댓글 내용은 아직 연결되지 않았습니다.':'아직 등록된 댓글이 없습니다.';
+    byId('commentsTitle').querySelector('span').textContent=shownCount.toLocaleString();
+    byId('commentsStatus').hidden=total>0;
+    byId('commentsStatus').textContent=shownCount>0?'댓글 내용은 아직 연결되지 않았습니다.':'아직 등록된 댓글이 없습니다.';
+    byId('commentsNotice').textContent=current.commentsAreExamples?'아래 '+total+'개는 작성자 답글을 포함한 화면 확인용 예시입니다. 실제 독자 후기나 치료 경험이 아닙니다.':'서버 댓글 작성 기능은 아직 연결되지 않았습니다.';
     byId('commentNew').hidden=current.commentsNew!==true;
   }
   async function share(){
