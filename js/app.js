@@ -49,8 +49,6 @@
       text('menuSheetTitle','주제 보기');
       text('menuSheetDescription','관심 있는 게시판으로 바로 이동하세요.');
       for(const board of ['전체글','인기글','자유게시판','후기','공지'])body.append(menuLink(board,board));
-    }else if(kind==='comments'){
-      text('menuSheetTitle','댓글');text('menuSheetDescription','');const message=document.createElement('p');message.textContent='아직 등록된 댓글이 없습니다. 현재 페이지는 댓글 작성 기능을 제공하지 않습니다.';body.append(message);
     }else{
       text('menuSheetTitle','소식');text('menuSheetDescription','공지와 인기글을 빠르게 확인하세요.');
       for(const [label,board] of [['공지사항','공지'],['인기글','인기글'],['최신 후기','후기'],['전체글','전체글']])body.append(menuLink(label,board));
@@ -58,7 +56,6 @@
     if(!menuSheet.open)menuSheet.showModal();
   }
   byId('topicsNav').addEventListener('click',()=>openMenu('topics'));
-  byId('commentsNav').addEventListener('click',()=>openMenu('comments'));
   byId('newsNav').addEventListener('click',()=>openMenu('news'));
   byId('closeMenuSheet').addEventListener('click',closeMenu);
   menuSheet.addEventListener('click',event=>{if(event.target===menuSheet){const rect=menuSheet.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)closeMenu();}});
