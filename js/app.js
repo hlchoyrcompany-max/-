@@ -9,8 +9,6 @@
   function render(config){
     current=config||{};document.title=(current.title||'새로운 기록')+' — '+(window.BLOG_DATA?.site?.name||'오늘의 기록');
     text('postTitle',current.title);text('author',current.author);text('avatar',(current.author||'기').slice(0,1));text('date',current.date);text('footerBrand',window.BLOG_DATA?.site?.name||'오늘의 기록');
-    document.querySelector('.blog-name').textContent=window.BLOG_DATA?.site?.name||'오늘의 기록';
-    text('postCategory',current.category||'일상 기록');
     document.querySelector('meta[name=description]').content=current.description||'';
     document.querySelector('meta[property="og:title"]').content=current.title||'';
     document.querySelector('meta[property="og:description"]').content=current.description||'';
@@ -36,7 +34,7 @@
     try{if(navigator.share){await navigator.share({title:current.title,url});return;}}catch(e){if(e.name==='AbortError')return;}
     try{await navigator.clipboard.writeText(url);toast('링크를 복사했습니다.');}catch{window.prompt('링크를 복사해 주세요.',url);}
   }
-  ['shareTop','shareBottom'].forEach(id=>byId(id).addEventListener('click',share));
+  byId('shareBottom').addEventListener('click',share);
   const menuSheet=byId('menuSheet');
   function closeMenu(){menuSheet.close();}
   function menuLink(label,board){const a=document.createElement('a');a.textContent=label;a.href='board.html?board='+encodeURIComponent(board);return a;}
