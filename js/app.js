@@ -30,18 +30,14 @@
 
   }
   function count(value){return Math.min(Number.MAX_SAFE_INTEGER-1,Math.max(0,Math.floor(Number(value)||0)));}
-  function liked(){try{return !preview&&localStorage.getItem('journal-liked:'+current.id)==='1';}catch{return false;}}
   function renderCounts(){
-    byId('likeCount').textContent=(count(current.likeCount)+(liked()?1:0)).toLocaleString();
+    byId('likeCount').textContent=count(current.likeCount).toLocaleString();
     byId('commentCount').textContent=count(current.commentCount).toLocaleString();
     byId('shareCount').textContent=count(current.shareCount).toLocaleString();
     byId('commentsTitle').querySelector('span').textContent=count(current.commentCount).toLocaleString();
     byId('comments').querySelector('p').textContent=count(current.commentCount)>0?'댓글 내용은 아직 연결되지 않았습니다.':'아직 등록된 댓글이 없습니다.';
     byId('commentNew').hidden=current.commentsNew!==true;
-    byId('likePost').setAttribute('aria-pressed',String(liked()));
   }
-  byId('likePost').addEventListener('click',()=>{if(preview){toast('미리보기에서는 공감을 저장하지 않습니다.');return;}try{const key='journal-liked:'+current.id;if(liked())localStorage.removeItem(key);else localStorage.setItem(key,'1');renderCounts();}catch{toast('이 브라우저에서는 공감을 저장할 수 없습니다.');}});
-  byId('likeDetails').addEventListener('click',()=>toast('공감 선택은 현재 브라우저에 저장됩니다.'));
   async function share(){
     const shareUrl=new URL(location.href);shareUrl.searchParams.delete('preview');
     const url=core.httpUrl(current.landingUrl)?.href||shareUrl.href;
