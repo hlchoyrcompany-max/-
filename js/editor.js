@@ -17,6 +17,9 @@
     const categoryLabel=document.createElement('label');categoryLabel.textContent='게시판';const category=document.createElement('select');for(const name of ['자유게시판','후기','공지']){const option=document.createElement('option');option.value=name;option.textContent=name;option.selected=config.category===name;category.append(option);}category.addEventListener('change',()=>{config.category=category.value;preview();});categoryLabel.append(category);$('settings').append(categoryLabel);
     field($('settings'),'키워드 (쉼표로 구분)',(config.tags||[]).join(', '),v=>{config.tags=v.split(',').map(x=>x.trim()).filter(Boolean);});
     field($('settings'),'목록 썸네일 이미지 경로 (선택)',config.thumbnail,v=>config.thumbnail=v);
+    for(const [key,label] of [['likeCount','표시할 공감 수'],['commentCount','표시할 댓글 수'],['shareCount','표시할 공유 수']]){const input=field($('settings'),label,String(config[key]||0),v=>{config[key]=Math.min(Number.MAX_SAFE_INTEGER-1,Math.max(0,Math.floor(Number(v)||0)));preview();});input.type='number';input.min='0';input.step='1';}
+    const notice=document.createElement('p');notice.className='hint';notice.textContent='직접 지정한 표시 수치입니다. 서버에서 집계하는 실제 통계와 연동되어 있지 않습니다.';$('settings').append(notice);
+    const newLabel=document.createElement('label');newLabel.className='check';const newCheck=document.createElement('input');newCheck.type='checkbox';newCheck.checked=config.commentsNew===true;newCheck.addEventListener('change',()=>{config.commentsNew=newCheck.checked;preview();});newLabel.append(newCheck,document.createTextNode('댓글 옆 NEW 표시'));$('settings').append(newLabel);
     for(const [key,label] of settings)field($('settings'),label,config[key],v=>{config[key]=v;if(key==='title')drawPostPicker();preview();});
     $('published').checked=config.published===true;$('featured').checked=config.featured===true;
   }

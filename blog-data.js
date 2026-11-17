@@ -35,7 +35,11 @@ window.BLOG_DATA = {
           "alt": "사진 자리",
           "caption": "사진을 추가해 주세요."
         }
-      ]
+      ],
+      "likeCount": 0,
+      "commentCount": 0,
+      "shareCount": 0,
+      "commentsNew": false
     }
   ]
 };
