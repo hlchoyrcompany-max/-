@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
 
 /* Shared article/editor quotation styles. */
 :where(.rich-editor,.post-body) blockquote.quote-large{position:relative;display:block;border:0;background:transparent;text-align:center;margin:56px 0;padding:48px 20px;color:#333;font-size:21px;line-height:1.8;font-family:Georgia,"Batang",serif;font-style:italic;white-space:pre-wrap}
@@ -11,3 +12,12 @@
 .rich-editor,.post-body .content-block.rich-document{line-height:1.6;white-space:pre-wrap}
 .rich-editor p,.rich-editor div,.post-body .rich-document p,.post-body .rich-document div{margin-top:0!important;margin-bottom:0!important;line-height:inherit}
 .rich-editor p:empty,.rich-editor div:empty,.post-body .rich-document p:empty,.post-body .rich-document div:empty{min-height:1.6em}
+
+.rich-editor blockquote.quote-large,.post-body blockquote.quote-large{font-family:"Nanum Myeongjo","Batang",serif;font-size:24px;font-style:italic;font-weight:700;letter-spacing:1px;line-height:1.8}
+:where(.rich-editor,.rich-document) u,:where(.rich-editor,.rich-document) [style*="text-decoration"]{text-decoration:none!important}
+:where(.rich-editor,.rich-document) .underline-run{ text-decoration-line:underline!important;text-decoration-color:currentColor!important;text-underline-offset:3px;text-decoration-thickness:1px}
+.rich-editor a:not(.link-card),.post-body .rich-document a:not(.link-card){color:#568fc1;text-decoration:underline;text-decoration-color:currentColor}
+.rich-editor a.link-card,.post-body a.link-card{display:flex;align-items:stretch;border:1px solid #e2e2e2;box-shadow:0 2px 5px #00000012;background:white;color:#111;text-decoration:none!important;width:100%;max-width:620px;margin:24px 0;white-space:normal;font-family:"Malgun Gothic",sans-serif;font-style:normal;font-weight:400;line-height:1.5;overflow:hidden}
+.link-card .link-card-icon{display:flex;flex:0 0 100px;align-items:center;justify-content:center;background:#03c75a;color:#fff;font-family:Arial,sans-serif;font-size:46px;font-weight:900}
+.link-card .link-card-copy{display:flex;flex:1;min-width:0;flex-direction:column;justify-content:center;padding:16px 20px;gap:2px}.link-card .link-card-title{font-size:17px;font-weight:700;color:#111}.link-card .link-card-description{font-size:14px;color:#444}.link-card .link-card-domain{font-size:13px;color:#03a94d;overflow-wrap:anywhere}.link-card:hover{border-color:#aaa}
+@media(max-width:480px){.link-card .link-card-icon{flex-basis:72px;font-size:34px}.link-card .link-card-copy{padding:12px}.rich-editor blockquote.quote-large,.post-body blockquote.quote-large{font-size:21px}}

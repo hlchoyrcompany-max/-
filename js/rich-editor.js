@@ -7,7 +7,7 @@
     let savedRange=null,selectedImage=null;
     function remember(){const s=window.getSelection();if(s.rangeCount&&editor.contains(s.anchorNode)&&editor.contains(s.focusNode))savedRange=s.getRangeAt(0).cloneRange();}
     function restore(){editor.focus();const s=window.getSelection();s.removeAllRanges();if(savedRange&&editor.contains(savedRange.commonAncestorContainer))s.addRange(savedRange);else{const r=document.createRange();r.selectNodeContents(editor);r.collapse(false);s.addRange(r);}}
-    function sync(){const safe=document.createElement('div');safe.append(window.RichContent.sanitize(editor.innerHTML));config.blocks=[{type:'paragraph',html:safe.innerHTML,text:editor.innerText}];onChange();}
+    function sync(){window.RichContent.normalizeUnderlines(editor);const safe=document.createElement('div');safe.append(window.RichContent.sanitize(editor.innerHTML));config.blocks=[{type:'paragraph',html:safe.innerHTML,text:editor.innerText}];onChange();}
     function command(name,value){restore();document.execCommand(name,false,value);remember();sync();}
     function button(label,action){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('mousedown',e=>{remember();e.preventDefault();});b.addEventListener('click',action);toolbar.append(b);return b;}
     button('굵게',()=>command('bold'));button('기울임',()=>command('italic'));button('밑줄',()=>command('underline'));button('취소선',()=>command('strikeThrough'));
@@ -41,7 +41,21 @@
     });
     for(const [label,tag] of [['일반 본문','p'],['제목 1','h2'],['제목 2','h3']])button(label,()=>command('formatBlock',tag));
     button('구분선',()=>command('insertHorizontalRule'));
-    button('링크',()=>{const value=prompt('연결할 https:// 주소를 입력하세요.');if(value===null)return;const url=window.LandingCore.httpUrl(value);if(!url){notify('http 또는 https 주소를 입력하세요.');return;}restore();if(window.getSelection().isCollapsed){const a=document.createElement('a');a.href=url.href;a.textContent=url.href;command('insertHTML',a.outerHTML);}else command('createLink',url.href);});
+    const linkPanel=document.createElement('div');linkPanel.className='link-panel';linkPanel.hidden=true;
+    const linkFields={};
+    for(const [key,label] of [['url','랜딩 URL'],['title','링크 제목'],['description','링크 설명']]){const wrap=document.createElement('label');wrap.textContent=label;const input=document.createElement('input');input.type=key==='url'?'url':'text';input.setAttribute('aria-label',label);wrap.append(input);linkPanel.append(wrap);linkFields[key]=input;}
+    const linkApply=document.createElement('button');linkApply.type='button';linkApply.textContent='링크 카드 넣기';linkPanel.append(linkApply);
+    linkApply.addEventListener('click',()=>{const url=window.LandingCore.httpUrl(linkFields.url.value);if(!url){notify('http 또는 https 랜딩 URL을 입력하세요.');linkFields.url.focus();return;}
+      const card=document.createElement('a');card.className='link-card';card.href=url.href;card.target='_blank';card.rel='noopener noreferrer';
+      const icon=document.createElement('span');icon.className='link-card-icon';icon.textContent=url.hostname.endsWith('.naver.com')||url.hostname==='naver.com'?'N':'↗';
+      const copy=document.createElement('span');copy.className='link-card-copy';
+      for(const [kind,text] of [['title',linkFields.title.value.trim()||url.hostname],['description',linkFields.description.value.trim()],['domain',url.hostname]]){const el=document.createElement('span');el.className='link-card-'+kind;el.textContent=text;copy.append(el);}
+      card.append(icon,copy);const holder=document.createElement('div');holder.append(card);const next=document.createElement('p');next.append(document.createElement('br'));holder.append(next);command('insertHTML',holder.innerHTML);linkPanel.hidden=true;
+    });
+    button('링크 카드',()=>{remember();linkPanel.hidden=false;linkFields.url.focus();});
+    button('선택 글자에 링크',()=>{remember();linkPanel.hidden=false;linkFields.url.focus();notify('주소 입력 후 아래 글자 링크 적용을 누르세요.');});
+    const textLinkApply=document.createElement('button');textLinkApply.type='button';textLinkApply.textContent='글자 링크 적용';linkPanel.append(textLinkApply);textLinkApply.addEventListener('click',()=>{const url=window.LandingCore.httpUrl(linkFields.url.value);if(!url){notify('http 또는 https 주소를 입력하세요.');return;}restore();if(window.getSelection().isCollapsed){const a=document.createElement('a');a.href=url.href;a.textContent=url.href;command('insertHTML',a.outerHTML);}else command('createLink',url.href);linkPanel.hidden=true;});
+    const linkCancel=document.createElement('button');linkCancel.type='button';linkCancel.textContent='링크 입력 닫기';linkCancel.addEventListener('click',()=>linkPanel.hidden=true);linkPanel.append(linkCancel);
     button('링크 해제',()=>command('unlink'));
     button('서식 지우기',()=>command('removeFormat'));button('실행 취소',()=>command('undo'));button('다시 실행',()=>command('redo'));
     const file=document.createElement('input');file.type='file';file.accept='image/jpeg,image/png,image/webp,image/gif';file.hidden=true;file.setAttribute('aria-label','본문 사진 파일');
@@ -66,7 +80,7 @@
     });
     editor.addEventListener('drop',e=>{e.preventDefault();notify('사진은 커서를 놓고 사진 넣기 버튼으로 선택하세요.');});
     const hint=document.createElement('p');hint.className='hint';hint.textContent='Ctrl+B 굵게 · Ctrl+I 기울임 · Ctrl+U 밑줄 · Enter 줄바꿈. 사진을 클릭하면 크기 변경·삭제가 가능합니다. 사진은 데이터 파일에 포함되어 용량이 커질 수 있습니다.';
-    parent.append(toolbar,sourcePanel,editor,file,hint);
+    parent.append(toolbar,sourcePanel,linkPanel,editor,file,hint);
   }
   window.RichEditor={mount};
 })();

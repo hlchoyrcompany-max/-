@@ -6,6 +6,18 @@
     const s=String(value||'');
     return /^data:image\/(png|jpeg|webp|gif);base64,[a-z0-9+/=\s]+$/i.test(s)?s:window.LandingCore.imageUrl(s);
   }
+  function normalizeUnderlines(root){
+    const selection=window.getSelection();const anchor=selection?.anchorNode,focus=selection?.focusNode,ao=selection?.anchorOffset,fo=selection?.focusOffset;
+    for(const span of root.querySelectorAll('.underline-run')){let p=span.parentElement,active=false;while(p&&p!==root){if(p.tagName==='U'||p.style.textDecorationLine.includes('underline')){active=true;break;}p=p.parentElement;}if(!active)span.classList.remove('underline-run');}
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+    for(const node of nodes){
+      if(!node.textContent||node.parentElement?.closest('.underline-run'))continue;
+      let parent=node.parentElement,underlined=false;
+      while(parent&&parent!==root){if(parent.tagName==='U'||parent.style.textDecorationLine.includes('underline')){underlined=true;break;}parent=parent.parentElement;}
+      if(underlined){const span=document.createElement('span');span.className='underline-run';node.replaceWith(span);span.append(node);}
+    }
+    if(anchor&&focus&&root.contains(anchor)&&root.contains(focus))selection.setBaseAndExtent(anchor,ao,focus,fo);
+  }
   function sanitize(html){
     const template=document.createElement('template');template.innerHTML=String(html||'');
     const result=document.createDocumentFragment();
@@ -18,6 +30,8 @@
       if(node.tagName==='BLOCKQUOTE'&&['quote-large','quote-line','quote-box'].includes(node.className))el.className=node.className;
       if(node.tagName==='DIV'&&node.className==='quote-text')el.className='quote-text';
       if(node.tagName==='CITE')el.className='quote-source';
+      if(node.tagName==='SPAN'&&['underline-run','link-card-icon','link-card-copy','link-card-title','link-card-description','link-card-domain'].includes(node.className))el.className=node.className;
+      if(node.tagName==='A'&&node.className==='link-card')el.className='link-card';
       for(const prop of ['color','backgroundColor'])if(colors.test(node.style[prop]))el.style[prop]=node.style[prop];
       if(['left','center','right'].includes(node.style.textAlign))el.style.textAlign=node.style.textAlign;
       if(/^(bold|normal|[1-9]00)$/.test(node.style.fontWeight))el.style.fontWeight=node.style.fontWeight;
@@ -38,7 +52,7 @@
       }
       for(const child of node.childNodes)copy(child,el);parent.append(el);
     }
-    for(const child of template.content.childNodes)copy(child,result);return result;
+    for(const child of template.content.childNodes)copy(child,result);normalizeUnderlines(result);return result;
   }
   function fromBlocks(blocks){
     const root=document.createElement('div');
@@ -61,5 +75,5 @@
     }
     return root;
   }
-  window.RichContent={sanitize,imageSource,fromBlocks};
+  window.RichContent={sanitize,imageSource,fromBlocks,normalizeUnderlines};
 })();
