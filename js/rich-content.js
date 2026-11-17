@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const tags=new Set(['P','DIV','BR','STRONG','B','EM','I','U','S','SPAN','FONT','MARK','H2','H3','BLOCKQUOTE','UL','OL','LI','HR','IMG','A']);
+  const tags=new Set(['P','DIV','BR','STRONG','B','EM','I','U','S','SPAN','FONT','MARK','H2','H3','BLOCKQUOTE','CITE','UL','OL','LI','HR','IMG','A']);
   const colors=/^(#[0-9a-f]{3,8}|rgba?\([\d.,%\s]+\)|[a-z]{1,20})$/i;
   function imageSource(value){
     const s=String(value||'');
@@ -15,6 +15,9 @@
       if(['SCRIPT','STYLE','IFRAME','OBJECT','SVG','MATH','TEMPLATE'].includes(node.tagName))return;
       if(!tags.has(node.tagName)){for(const child of node.childNodes)copy(child,parent);return;}
       const el=document.createElement(node.tagName.toLowerCase());
+      if(node.tagName==='BLOCKQUOTE'&&['quote-large','quote-line','quote-box'].includes(node.className))el.className=node.className;
+      if(node.tagName==='DIV'&&node.className==='quote-text')el.className='quote-text';
+      if(node.tagName==='CITE')el.className='quote-source';
       for(const prop of ['color','backgroundColor'])if(colors.test(node.style[prop]))el.style[prop]=node.style[prop];
       if(['left','center','right'].includes(node.style.textAlign))el.style.textAlign=node.style.textAlign;
       if(/^(12|28|64)px$/.test(node.style.marginBottom))el.style.marginBottom=node.style.marginBottom;
@@ -43,6 +46,7 @@
     for(const block of blocks||[]){
       if(typeof block.html==='string'){root.append(sanitize(block.html));continue;}
       const el=document.createElement(({heading:'h2',quote:'blockquote',image:'p',divider:'hr'})[block.type]||'p');
+      if(block.type==='quote')el.className='quote-large';
       if(block.type==='image'){
         const src=imageSource(block.src);if(src){const img=document.createElement('img');img.src=src;img.alt=block.alt||'';el.append(img);}
         if(block.caption){el.append(document.createElement('br'),document.createTextNode(block.caption));}

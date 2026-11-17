@@ -18,6 +18,31 @@
     for(const [value,label] of [['','글자 크기'],['2','14px'],['3','16px'],['4','18px'],['5','24px'],['6','32px'],['7','48px']]){const o=document.createElement('option');o.value=value;o.textContent=label;size.append(o);}
     size.addEventListener('mousedown',remember);size.addEventListener('change',()=>{if(size.value)command('fontSize',size.value);size.value='';});toolbar.append(size);
     for(const [label,cmd] of [['왼쪽','justifyLeft'],['가운데','justifyCenter'],['오른쪽','justifyRight'],['글머리표','insertUnorderedList'],['번호 목록','insertOrderedList']])button(label,()=>command(cmd));
+    function insertQuote(kind){
+      restore();const selection=window.getSelection();const quote=document.createElement('blockquote');quote.className='quote-'+kind;
+      const body=document.createElement('div');body.className='quote-text';
+      if(selection.rangeCount&&!selection.isCollapsed)body.append(selection.getRangeAt(0).cloneContents());
+      else body.textContent='인용구를 입력하세요.';
+      quote.append(body);const holder=document.createElement('div');holder.append(quote);holder.append(document.createElement('p'));holder.lastChild.append(document.createElement('br'));
+      command('insertHTML',holder.innerHTML);
+    }
+    button('❝ 큰따옴표 인용구',()=>insertQuote('large'));
+    button('인용구 · 세로선',()=>insertQuote('line'));
+    button('인용구 · 상자',()=>insertQuote('box'));
+    const sourcePanel=document.createElement('div');sourcePanel.className='quote-source-panel';sourcePanel.hidden=true;
+    const sourceLabel=document.createElement('label');sourceLabel.textContent='인용구 출처';const sourceInput=document.createElement('input');sourceInput.type='text';sourceInput.setAttribute('aria-label','인용구 출처 내용');sourceLabel.append(sourceInput);sourcePanel.append(sourceLabel);
+    let sourceQuote=null;
+    const saveSource=document.createElement('button');saveSource.type='button';saveSource.textContent='출처 적용';sourcePanel.append(saveSource);
+    saveSource.addEventListener('click',()=>{if(!sourceQuote||!editor.contains(sourceQuote))return;const existing=sourceQuote.querySelector('.quote-source');if(!sourceInput.value.trim()){existing?.remove();}else{const source=existing||document.createElement('cite');source.className='quote-source';source.textContent=sourceInput.value.trim();if(!existing)sourceQuote.append(source);}sourcePanel.hidden=true;sync();});
+    button('인용구 출처',()=>{
+      restore();const node=window.getSelection().anchorNode;const quote=(node?.nodeType===1?node:node?.parentElement)?.closest('blockquote');
+      if(!quote||!editor.contains(quote)){notify('출처를 넣을 인용구 안을 먼저 클릭하세요.');return;}
+      sourceQuote=quote;sourceInput.value=quote.querySelector('.quote-source')?.textContent||'';sourcePanel.hidden=false;sourceInput.focus();
+    });
+    for(const [label,tag] of [['일반 본문','p'],['제목 1','h2'],['제목 2','h3']])button(label,()=>command('formatBlock',tag));
+    button('구분선',()=>command('insertHorizontalRule'));
+    button('링크',()=>{const value=prompt('연결할 https:// 주소를 입력하세요.');if(value===null)return;const url=window.LandingCore.httpUrl(value);if(!url){notify('http 또는 https 주소를 입력하세요.');return;}restore();if(window.getSelection().isCollapsed){const a=document.createElement('a');a.href=url.href;a.textContent=url.href;command('insertHTML',a.outerHTML);}else command('createLink',url.href);});
+    button('링크 해제',()=>command('unlink'));
     button('서식 지우기',()=>command('removeFormat'));button('실행 취소',()=>command('undo'));button('다시 실행',()=>command('redo'));
     const file=document.createElement('input');file.type='file';file.accept='image/jpeg,image/png,image/webp,image/gif';file.hidden=true;file.setAttribute('aria-label','본문 사진 파일');
     button('사진 넣기',()=>{remember();file.click();});
@@ -41,7 +66,7 @@
     });
     editor.addEventListener('drop',e=>{e.preventDefault();notify('사진은 커서를 놓고 사진 넣기 버튼으로 선택하세요.');});
     const hint=document.createElement('p');hint.className='hint';hint.textContent='Ctrl+B 굵게 · Ctrl+I 기울임 · Ctrl+U 밑줄 · Enter 줄바꿈. 사진을 클릭하면 크기 변경·삭제가 가능합니다. 사진은 데이터 파일에 포함되어 용량이 커질 수 있습니다.';
-    parent.append(toolbar,editor,file,hint);
+    parent.append(toolbar,sourcePanel,editor,file,hint);
   }
   window.RichEditor={mount};
 })();

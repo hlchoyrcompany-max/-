@@ -7,3 +7,5 @@ select{display:block;width:100%;font:inherit;color:#283d2e;background:#fcfdfa;bo
 .rich-toolbar button{font-size:12px;padding:7px 9px}.rich-toolbar label{margin:0;display:flex;align-items:center;gap:4px;font-size:11px}.rich-toolbar input[type=color]{width:28px;height:28px;padding:2px;margin:0;cursor:pointer}.rich-toolbar select{width:auto;margin:0;padding:6px;font-size:12px}
 .rich-editor{border:1px solid #d6ded3;background:#fff;padding:26px;min-height:420px;max-height:70vh;overflow:auto;line-height:1.9;font-size:16px;color:#222;outline:none;overflow-wrap:anywhere;white-space:pre-wrap}.rich-editor:focus{border-color:#5c946d;box-shadow:0 0 0 1px #5c946d}.rich-editor p,.rich-editor div{margin:0 0 28px}.rich-editor img{max-width:100%;height:auto;cursor:pointer}.rich-editor .selected-photo{outline:3px solid #03a85a;outline-offset:3px}.rich-editor blockquote{border-left:3px solid #ddd;padding-left:18px;margin:32px 0}.rich-editor strong,.rich-editor b{font-weight:700}.rich-editor ul,.rich-editor ol{white-space:normal}
 [hidden]{display:none!important}
+
+.quote-source-panel{padding:12px;background:#f7f9f6;border:1px solid #d6ded3}.quote-source-panel label{margin:0 0 8px}
