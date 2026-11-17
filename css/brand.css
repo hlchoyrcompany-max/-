@@ -69,3 +69,19 @@ body{background:#f5f6f5}.wrap{padding-bottom:85px}.blog-top{position:relative}.b
 .post-body .content-block strong{font-weight:700}
 
 .post-body .content-block[style],.post-body .content-block{overflow-wrap:anywhere}.post-body .content-block>p,.post-body .content-block>div{margin:0 0 28px;white-space:pre-wrap}.post-body .content-block img{max-width:100%;height:auto}.post-body .content-block b{font-weight:700}
+
+/* Cafe-style comment rows, with sample labels retained. */
+#commentThreads .reader-comment{position:relative;padding:20px 38px 18px 48px;border-bottom:1px solid #f0f0f0;margin:0;background:#fff}
+#commentThreads .reader-comment-header{gap:6px;align-items:center;font-size:14px}
+#commentThreads .reader-avatar{position:absolute;left:0;top:20px;width:36px;height:36px;border-radius:50%;background:#e8e8e8;color:transparent;font-size:0;overflow:hidden}
+#commentThreads .reader-avatar:before{content:"";position:absolute;width:12px;height:14px;border-radius:50%;background:white;left:12px;top:7px}
+#commentThreads .reader-avatar:after{content:"";position:absolute;width:25px;height:20px;border-radius:50% 50% 0 0;background:white;left:6px;top:22px}
+#commentThreads .reader-comment-text{margin:5px 0 6px;font-size:15px;line-height:1.65}
+#commentThreads .reader-comment-date{font-size:12px;color:#999}
+#commentThreads .reader-comment-actions{margin:0;min-height:0}
+#commentThreads .reader-comment-like{position:absolute;right:4px;top:42px;border:0;padding:0;min-height:0;background:transparent;color:#aaa;font-size:16px}
+#commentThreads .reader-replies{border:0;padding:0;margin:16px -38px -18px -48px}
+#commentThreads .reader-comment-reply{padding-left:88px;background:#f8f8fa;border:0}
+#commentThreads .reader-comment-reply .reader-avatar{left:40px}
+#commentThreads .comment-author-badge{background:#e9faf2;border:0;color:#28ad79;border-radius:10px;font-size:10px;padding:2px 5px}
+#commentThreads .reader-reply-button{font-size:11px;border:0;background:transparent;color:#999;padding:4px 0}

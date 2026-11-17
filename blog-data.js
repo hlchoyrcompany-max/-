@@ -32,283 +32,205 @@ window.BLOG_DATA = {
         }
       ],
       "likeCount": 0,
-      "commentCount": 32,
+      "commentCount": 27,
       "shareCount": 0,
       "commentsNew": false,
       "reviewRequired": true,
-      "commentsAreExamples": true,
       "comments": [
         {
-          "id": "example-01",
-          "author": "예시 독자 01",
-          "text": "이 글은 진료를 대신하는 안내인가요?",
-          "isExample": true,
+          "author": "청솔",
+          "text": "너무 좋은 정보 매번 감사합니다... 저도 역류성식도염이 너무 심해서 몇 년을 고생 중이었는데 알려주신대로 지금 3개월째 먹고 있네요.. 지금은 언제 그랬냐는 듯 식도염이 많이 좋아졌습니다. 정말 감사합니다.",
+          "date": "2026.10.23. 09:13",
           "likes": 0,
           "replies": [
             {
-              "id": "example-01-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "아니요. 이 원고는 검토 중이며 진단과 치료는 의료진과 상담해야 합니다.",
+              "text": "좋아지셨다니 정말 다행이네요. 꾸준히 챙기시면서 건강 관리 하시기 바랍니다!",
+              "date": "2026.10.23. 11:35",
+              "likes": 0,
+              "isAuthor": true
+            },
+            {
+              "author": "호박만",
+              "text": "달콤라떼 저도 너무 좋아졌어요. 감사합니다!",
+              "date": "2026.10.23. 13:10",
               "likes": 0
             }
           ]
         },
         {
-          "id": "example-02",
-          "author": "예시 독자 02",
-          "text": "위염과 역류성식도염은 같은 질환인가요?",
-          "isExample": true,
+          "author": "구르미야",
+          "text": "솔직히 양배추 좋은 건 꾸준히 먹어본 사람만 알죠. 양배추즙이랑 위산억제제 같은 거나 달고 살았었는데 지금은 저도 살만하네요. 감사합니다!!",
+          "date": "2026.10.23. 09:21",
           "likes": 0,
           "replies": [
             {
-              "id": "example-02-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "서로 다른 질환입니다. 원문의 정의가 섞인 부분은 바로잡아야 합니다.",
-              "likes": 0
+              "text": "맞아요. 양배추는 꾸준히 먹어야 좋은 걸 알 수 있죠. 좋아지셨다니 다행입니다.",
+              "date": "2026.10.23. 11:37",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-03",
-          "author": "예시 독자 03",
-          "text": "복용 중인 처방약을 끊어도 된다는 뜻인가요?",
-          "isExample": true,
+          "author": "오동통",
+          "text": "저도 아는 분 추천으로 똑같은 제품을 1년 정도 꾸준히 먹고 있는데, 정말 많이 좋아졌어요. 역시 좋은 건 다들 알아보시나 봐요ㅎㅎ 오래 꾸준히 먹다 보니 확실히 체감이 되는 것 같습니다.",
+          "date": "2026.10.23. 09:25",
           "likes": 0,
           "replies": [
             {
-              "id": "example-03-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "그런 뜻으로 사용하면 안 됩니다. 처방약의 변경이나 중단은 담당 의료진과 상의하세요.",
-              "likes": 0
+              "text": "체감이 되셨다니 잘하고 계신 겁니다. 지금처럼만 관리하시면 됩니다.",
+              "date": "2026.10.23. 11:38",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-04",
-          "author": "예시 독자 04",
-          "text": "참고한 논문 원문을 확인할 수 있나요?",
-          "isExample": true,
+          "author": "소하",
+          "text": "정말 감사합니다ㅠㅠㅠ",
+          "date": "2026.10.23. 09:32",
           "likes": 0,
           "replies": [
             {
-              "id": "example-04-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "원고에 인용된 연구의 정확한 제목과 원문을 확인한 뒤 출처를 보완해야 합니다.",
-              "likes": 0
+              "text": "도움이 되셨다니 다행입니다!!",
+              "date": "2026.10.23. 11:44",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-05",
-          "author": "예시 독자 05",
-          "text": "양배추 식품이 치료 효과를 보장하나요?",
-          "isExample": true,
+          "author": "쿠링",
+          "text": "아 저도 이거 이제 먹기 시작했는데 좋긴합니다... 이렇게까지 자세하게 알려주셔서 감사합니다.",
+          "date": "2026.10.23. 11:29",
           "likes": 0,
           "replies": [
             {
-              "id": "example-05-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "이 댓글은 제품의 치료 효과를 보증하지 않습니다. 식품과 의약품을 구분해야 합니다.",
-              "likes": 0
+              "text": "꼭 완쾌하시길 바랍니다.",
+              "date": "2026.10.23. 11:45",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-06",
-          "author": "예시 독자 06",
-          "text": "연구 대상이 위궤양인지 역류성식도염인지 구분되나요?",
-          "isExample": true,
+          "author": "소봉히",
+          "text": "5년째 역류성식도염 때문에 고생중인데 너무 좋은 글이네요. 감사합니다",
+          "date": "2026.10.23. 11:30",
           "likes": 0,
           "replies": [
             {
-              "id": "example-06-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "연구 질환과 실제 주장하는 질환이 일치하는지 검토가 필요합니다.",
-              "likes": 0
+              "text": "저와 같은 효과 보실 수 있을 겁니다. 꾸준히 관리하시기 바랍니다.",
+              "date": "2026.10.23. 11:46",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-07",
-          "author": "예시 독자 07",
-          "text": "개인의 경험을 모든 사람에게 적용할 수 있나요?",
-          "isExample": true,
+          "author": "문어발",
+          "text": "역류성 식도염에도 그렇지만 전 위염도 엄청 심한데 똑같이 효과 보겠죠",
+          "date": "2026.10.23. 11:44",
           "likes": 0,
           "replies": [
             {
-              "id": "example-07-reply",
               "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "개인 경험을 일반적인 치료 결과로 단정할 수 없습니다.",
-              "likes": 0
+              "text": "역류성식도염 뿐만 아닌 위염에도 좋은 효과를 보실 수 있습니다",
+              "date": "2026.10.23. 11:46",
+              "likes": 0,
+              "isAuthor": true
             }
           ]
         },
         {
-          "id": "example-08",
-          "author": "예시 독자 08",
-          "text": "사진이 보이지 않는 부분이 있네요.",
-          "isExample": true,
+          "author": "펭수니",
+          "text": "위가 안좋아서 좋다는 건 다 해봤는데 희망이 좀 생기네요",
+          "date": "2026.10.23. 11:50",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-08-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "텍스트 원고만 제공되어 실제 사진은 아직 첨부하지 않았습니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-09",
-          "author": "예시 독자 09",
-          "text": "제품을 선택할 때 확인한 자료가 있나요?",
-          "isExample": true,
+          "author": "나비야",
+          "text": "이대로 관리 해봐야겠어요ㅠㅠ",
+          "date": "2026.10.23. 11:51",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-09-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "원료나 제조 방식에 관한 설명과 임상적 치료 효과 주장은 별도로 확인해야 합니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-10",
-          "author": "예시 독자 10",
-          "text": "문단 사이에 소제목을 넣으면 읽기 편할 것 같아요.",
-          "isExample": true,
+          "author": "코코맘이다",
+          "text": "관리법 찾다가 이글보고 많이 배워갑니다 감사해요",
+          "date": "2026.10.23. 11:52",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-10-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "원문을 먼저 보존했고, 편집실에서 소제목과 이미지를 추가할 수 있도록 했습니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-11",
-          "author": "예시 독자 11",
-          "text": "원문에 적힌 재발률 수치의 출처가 궁금해요.",
-          "isExample": true,
+          "author": "하루사냥꾼",
+          "text": "와... 이런 정성스러운 글.. 진심이 느껴집니다. 많이 배워갑니다ㅠㅠ",
+          "date": "2026.10.23. 11:54",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-11-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "수치를 뒷받침하는 검증 가능한 출처가 필요합니다. 확인 전에는 확정적 사실로 쓰지 않아야 합니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-12",
-          "author": "예시 독자 12",
-          "text": "증상이 반복되면 어디에 문의해야 하나요?",
-          "isExample": true,
+          "author": "들꽃향기",
+          "text": "고맙습니다 저도 선생님같은 효과가있기를 진심으로 고대합니다 복받으실겁니다~",
+          "date": "2026.10.23. 12:00",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-12-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "블로그 댓글로 진단받기보다 의료기관에서 상담하는 편이 적절합니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-13",
-          "author": "예시 독자 13",
-          "text": "식단 기록을 따로 정리하는 칸도 있으면 좋겠어요.",
-          "isExample": true,
+          "author": "무화과냠",
+          "text": "안그래도 드셨다는 거 궁금했는데 알려주셔서 감사해요!",
+          "date": "2026.10.23. 13:02",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-13-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "식사와 불편했던 시간을 정리하는 용도로 원고를 구성할 수 있습니다. 기록이 진단을 대신하지는 않습니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-14",
-          "author": "예시 독자 14",
-          "text": "약의 부작용 설명은 어떻게 확인하나요?",
-          "isExample": true,
+          "author": "느링",
+          "text": "좋은 글 감사합니다..",
+          "date": "2026.10.23. 13:03",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-14-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "약의 이점과 위험은 개인 상황에 따라 달라집니다. 담당 의료진이나 약사에게 확인하세요.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-15",
-          "author": "예시 독자 15",
-          "text": "여기 보이는 댓글은 실제 방문자가 쓴 건가요?",
-          "isExample": true,
+          "author": "흐나",
+          "text": "그동안 너무 고생 많으셨습니다. 완치 축하드려요!!",
+          "date": "2026.10.23. 13:04",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-15-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "아니요. 이 댓글과 답변은 레이아웃 확인용으로 작성한 예시입니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
         },
         {
-          "id": "example-16",
-          "author": "예시 독자 16",
-          "text": "공개 전에 어떤 부분을 확인하나요?",
-          "isExample": true,
+          "author": "혼비",
+          "text": "병원댕겨도 별 수가 없어서 막막했는데 이 글 읽고 많이 배워갑니다 감사해요",
+          "date": "2026.10.23. 13:06",
           "likes": 0,
-          "replies": [
-            {
-              "id": "example-16-reply",
-              "author": "달콤라떼",
-              "isAuthor": true,
-              "isExample": true,
-              "text": "질환 정의, 연구 출처, 치료 효과와 완치 단정, 전문가 추천의 사실 여부를 먼저 검토해야 합니다.",
-              "likes": 0
-            }
-          ]
+          "replies": []
+        },
+        {
+          "author": "귤랑이",
+          "text": "와... 진짜 너무 감사합니다.. 덕분에 많이 회복됐어요....",
+          "date": "2026.10.23. 13:07",
+          "likes": 0,
+          "replies": []
+        },
+        {
+          "author": "송송",
+          "text": "덕분에 좋은 정보 잘 알고갑니다~",
+          "date": "2026.10.23. 13:08",
+          "likes": 0,
+          "replies": []
+        },
+        {
+          "author": "호박만",
+          "text": "이 글 보고 진짜 너무너무 도움 많이 받았습니다.... 저도 완치 소견 받았어요...",
+          "date": "2026.10.23. 13:09",
+          "likes": 0,
+          "replies": []
         }
       ]
     },
