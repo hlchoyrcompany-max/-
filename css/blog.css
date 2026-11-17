@@ -9,12 +9,12 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  /* 광고 스페이서도 동일 높이 유지 (← / 블로그명 줄과 맞춤) */
+
   min-height: calc(32px + 24px);
   box-sizing: border-box;
 }
 
-/* 광고 랜딩: 상단 컨트롤 제거, 위·아래 여백만 유지 */
+
 .blog-top--ad-spacer {
   pointer-events: none;
 }
