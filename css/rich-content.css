@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
 
+/* Keep article photos against the left edge, including previously centered photos. */
+.rich-editor img,.post-body img,.post-body .content-block.image img{display:block!important;margin-left:0!important;margin-right:auto!important;float:none!important;max-width:100%;height:auto}
+
 /* Shared article/editor quotation styles. */
 :where(.rich-editor,.post-body) blockquote.quote-large{position:relative;display:block;border:0;background:transparent;text-align:center;margin:56px 0;padding:48px 20px;color:#333;font-size:21px;line-height:1.8;font-family:Georgia,"Batang",serif;font-style:italic;white-space:pre-wrap}
 :where(.rich-editor,.post-body) blockquote.quote-large::before,:where(.rich-editor,.post-body) blockquote.quote-large::after{display:block;position:absolute;left:0;right:0;color:#c5c5c5;font-family:Georgia,serif;font-size:48px;line-height:1;font-weight:bold;font-style:normal}
