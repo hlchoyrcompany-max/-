@@ -1,7 +1,7 @@
-/* 오늘의 기록 블로그 데이터 — editor.html에서 편집 */
+/* sweetlatte1117 블로그 데이터 — editor.html에서 편집 */
 window.BLOG_DATA = {
   "site": {
-    "name": "오늘의 기록",
+    "name": "sweetlatte1117",
     "author": "달콤라떼",
     "profileDescription": "일상 속 작은 순간을 기록합니다.",
     "bannerImage": "",
@@ -14,7 +14,7 @@ window.BLOG_DATA = {
       "title": "위염과 역류성식도염 관리 기록",
       "description": "위염과 역류성식도염 관리에 관해 정리한 기록입니다.",
       "date": "",
-      "landingUrl": "",
+      "landingUrl": "https://hlchoyrcompany-max.github.io/-/JL3jZVy984sIQ2127drz/",
       "ga4Id": "",
       "category": "자유게시판",
       "tags": [
@@ -232,7 +232,8 @@ window.BLOG_DATA = {
           "likes": 0,
           "replies": []
         }
-      ]
+      ],
+      "slug": "JL3jZVy984sIQ2127drz"
     },
     {
       "id": "first-post",
