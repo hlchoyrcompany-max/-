@@ -39,7 +39,29 @@
     try{if(navigator.share){await navigator.share({title:current.title,url});return;}}catch(e){if(e.name==='AbortError')return;}
     try{await navigator.clipboard.writeText(url);toast('링크를 복사했습니다.');}catch{window.prompt('링크를 복사해 주세요.',url);}
   }
-  ['shareTop','shareBottom','shareNav'].forEach(id=>byId(id).addEventListener('click',share));
+  ['shareTop','shareBottom'].forEach(id=>byId(id).addEventListener('click',share));
+  const menuSheet=byId('menuSheet');
+  function closeMenu(){menuSheet.close();}
+  function menuLink(label,board){const a=document.createElement('a');a.textContent=label;a.href='board.html?board='+encodeURIComponent(board);return a;}
+  function openMenu(kind){
+    const body=byId('menuSheetBody');body.replaceChildren();
+    if(kind==='topics'){
+      text('menuSheetTitle','주제 보기');
+      text('menuSheetDescription','관심 있는 게시판으로 바로 이동하세요.');
+      for(const board of ['전체글','인기글','자유게시판','후기','공지'])body.append(menuLink(board,board));
+    }else if(kind==='comments'){
+      text('menuSheetTitle','댓글');text('menuSheetDescription','');const message=document.createElement('p');message.textContent='아직 등록된 댓글이 없습니다. 현재 페이지는 댓글 작성 기능을 제공하지 않습니다.';body.append(message);
+    }else{
+      text('menuSheetTitle','소식');text('menuSheetDescription','공지와 인기글을 빠르게 확인하세요.');
+      for(const [label,board] of [['공지사항','공지'],['인기글','인기글'],['최신 후기','후기'],['전체글','전체글']])body.append(menuLink(label,board));
+    }
+    if(!menuSheet.open)menuSheet.showModal();
+  }
+  byId('topicsNav').addEventListener('click',()=>openMenu('topics'));
+  byId('commentsNav').addEventListener('click',()=>openMenu('comments'));
+  byId('newsNav').addEventListener('click',()=>openMenu('news'));
+  byId('closeMenuSheet').addEventListener('click',closeMenu);
+  menuSheet.addEventListener('click',event=>{if(event.target===menuSheet){const rect=menuSheet.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)closeMenu();}});
   document.querySelectorAll('.purchase-link').forEach(a=>a.addEventListener('click',event=>{
     if(preview){event.preventDefault();toast('미리보기에서는 구매 페이지로 이동하지 않습니다.');return;}
     if(a.getAttribute('aria-disabled')==='true'){event.preventDefault();toast('구매 링크를 먼저 설정해 주세요.');return;}
