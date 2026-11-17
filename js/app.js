@@ -4,13 +4,15 @@
   const byId=id=>document.getElementById(id);
   const preview=new URLSearchParams(location.search).get('preview')==='1';
   let current;let toastTimer;
-  function text(id,value){byId(id).textContent=value||'';}
+  function text(id,value){const el=byId(id);if(el)el.textContent=value||'';}
   function toast(message){text('toast',message);byId('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>byId('toast').hidden=true,3200);}
   function render(config){
     current=config||{};document.title=(current.title||'양배추 스틱')+' — '+(current.brand||'백년건강소');
     text('postTitle',current.title);text('author',current.author);text('avatar',(current.author||'백').slice(0,1));text('date',current.date);text('disclosure',current.disclosure);text('footerBrand',current.brand);text('businessInfo',current.businessInfo);
     document.querySelector('.blog-name').textContent=current.brand||'백년건강소';
     document.querySelector('.product-eyebrow').textContent=current.brand||'';
+    text('postCategory',current.category||'브랜드 이야기');
+    byId('product').hidden=current.showProduct===false;
     text('productTitle',current.productName);text('productDescription',current.productDescription);
     document.querySelector('meta[name=description]').content=current.description||'';
     document.querySelector('meta[property="og:title"]').content=current.title||'';
@@ -35,7 +37,8 @@
     text('purchaseNote',href?'버튼을 누르면 판매 페이지로 이동합니다.':'구매 링크가 아직 설정되지 않았습니다.');
   }
   async function share(){
-    const url=core.httpUrl(current.landingUrl)?.href||location.href.replace(/[?&]preview=1/, '');
+    const shareUrl=new URL(location.href);shareUrl.searchParams.delete('preview');
+    const url=core.httpUrl(current.landingUrl)?.href||shareUrl.href;
     try{if(navigator.share){await navigator.share({title:current.title,url});return;}}catch(e){if(e.name==='AbortError')return;}
     try{await navigator.clipboard.writeText(url);toast('링크를 복사했습니다.');}catch{window.prompt('링크를 복사해 주세요.',url);}
   }
@@ -64,7 +67,10 @@
     if(a.getAttribute('aria-disabled')==='true'){event.preventDefault();toast('구매 링크를 먼저 설정해 주세요.');return;}
     if(typeof window.gtag==='function')window.gtag('event','purchase_link_click',{link_url:a.href,link_position:a.id,transport_type:'beacon'});
   }));
-  render(window.LANDING_CONTENT);
+  const requestedPost=new URLSearchParams(location.search).get('post');
+  const blogPosts=window.BLOG_DATA?.posts||[];
+  const post=requestedPost?window.BlogCore.getPost(blogPosts,requestedPost):window.BlogCore.visible(blogPosts)[0];
+  render(post||{brand:window.BLOG_DATA?.site?.name||'백년건강소',author:'',title:'글을 찾을 수 없습니다.',showProduct:false,blocks:[{type:'paragraph',text:'삭제되었거나 공개되지 않은 글입니다. 상단의 블로그 이름을 눌러 홈으로 돌아가세요.'}]});
   if(preview)window.addEventListener('message',e=>{if(e.source!==parent||e.origin!==location.origin||e.data?.type!=='landing-preview')return;render(e.data.config);});
   // 선택 설정: 본인 GA4 ID를 넣은 경우에만 추적을 시작합니다. 원본 사이트의 추적 ID는 사용하지 않습니다.
   const gaId=String(current.ga4Id||'').trim();
