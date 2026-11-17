@@ -15,7 +15,8 @@
     const fragment=document.createDocumentFragment();
     for(const block of (Array.isArray(current.blocks)?current.blocks:[])){
       let el;
-      if(block.type==='divider')el=document.createElement('hr');
+      if(typeof block.html==='string'){el=document.createElement('div');el.append(window.RichContent.sanitize(block.html));}
+      else if(block.type==='divider')el=document.createElement('hr');
       else if(block.type==='image'){
         el=document.createElement('figure');const src=core.imageUrl(block.src);const img=document.createElement('img');img.alt=block.alt||'';img.loading='lazy';img.decoding='async';
         if(src)img.src=src;img.addEventListener('error',()=>{img.hidden=true;const warning=document.createElement('p');warning.textContent='이미지를 불러오지 못했습니다. 파일 경로를 확인해 주세요.';el.prepend(warning);},{once:true});el.append(img);
