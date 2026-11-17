@@ -36,9 +36,9 @@ window.BLOG_DATA = {
           "caption": "사진을 추가해 주세요."
         }
       ],
-      "likeCount": 68,402,
+      "likeCount": 68402,
       "commentCount": 32,
-      "shareCount": 62,388,
+      "shareCount": 62388,
       "commentsNew": false
     }
   ]
