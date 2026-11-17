@@ -42,7 +42,13 @@ python -m http.server 8080 --bind 127.0.0.1
 
 초안 저장은 현재 브라우저에만 저장합니다. 서버 관리자나 자동 업로드 기능이 아닙니다. 비공개 글도 정적 파일에는 포함되므로 민감한 정보는 넣지 마세요.
 
-## 이미지
+## 일부 단어만 굵게
+
+문단의 내용 입력칸에서 원하는 글자를 드래그해 선택한 뒤 `B 선택 굵게`를 누르세요. Ctrl+B(맥은 Command+B)도 사용할 수 있습니다. 이미 굵은 부분을 선택해 다시 누르면 그 부분만 해제됩니다. `부분 굵게 초기화`는 해당 문단의 부분 굵게 표시를 모두 지웁니다.
+
+입력칸은 일반 텍스트이며 적용 결과는 입력칸 아래의 서식 미리보기와 오른쪽 게시글 미리보기에 즉시 표시됩니다. 기존의 `글자 → 굵게`는 문단 전체에 적용되므로 일부만 굵게 하려면 전체 글자는 기본으로 두세요. blog-data.js 다운로드와 전체 초안 저장에도 부분 굵게 정보가 포함됩니다. 직접 파일을 편집할 때는 boldRanges의 숫자를 임의로 바꾸기보다 편집실을 사용하는 것이 안전합니다.
+
+## 사진 넣기
 
 사진을 assets/images/photo-01.jpg처럼 넣고 이미지 블록에 그 경로를 입력합니다. 내 PC 이미지 선택 기능은 영문 파일명 사본을 다운로드하므로 해당 파일을 직접 assets/images 폴더에 옮겨 주세요. 공개 HTTPS 이미지 주소도 가능합니다. 목록 썸네일이 없으면 본문 첫 이미지가 사용됩니다.
 
@@ -89,7 +95,7 @@ PC에서 `preview.html`을 열면 검토용 원고를 입력칸 없는 게시글
 ## 검증
 
 ```powershell
-node --test tests/core.test.cjs tests/blog.test.cjs
+node --test tests/core.test.cjs tests/blog.test.cjs tests/inline-bold.test.cjs
 ```
 
 공개 참고: https://m.blog.naver.com/ , https://m.blog.naver.com/blogpeople

@@ -35,7 +35,18 @@
         const pick=document.createElement('label');pick.textContent='내 PC 이미지 선택 → 파일 사본 다운로드';const file=document.createElement('input');file.type='file';file.accept='image/jpeg,image/png,image/webp,image/gif';
         file.addEventListener('change',()=>{const selected=file.files[0];if(!selected)return;if(!['image/jpeg','image/png','image/webp','image/gif'].includes(selected.type)){notify('JPG, PNG, WEBP, GIF 파일을 선택하세요.');return;}const ext={ 'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif'}[selected.type];const name='photo-'+Date.now()+'.'+ext;downloadBlob(name,selected);block.src='assets/images/'+name;drawBlocks();preview();notify('다운로드한 이미지를 assets/images 폴더에 넣어야 미리보기에 표시됩니다.');});pick.append(file);box.append(pick);
       }else if(block.type!=='divider'){
-        field(box,'내용',block.text,v=>{block.text=v;preview();},true);
+        const input=field(box,'내용',block.text,v=>{block.boldRanges=core.updateBoldRanges(block.text||'',v,block.boldRanges);block.text=v;drawInlinePreview();preview();},true);
+        const toolbar=document.createElement('div');toolbar.className='inline-toolbar';
+        const boldButton=document.createElement('button');boldButton.type='button';boldButton.className='inline-bold-button';boldButton.textContent='B 선택 굵게';boldButton.title='선택한 부분 굵게 / 해제 (Ctrl+B)';
+        const clearButton=document.createElement('button');clearButton.type='button';clearButton.textContent='부분 굵게 초기화';
+        toolbar.append(boldButton,clearButton);box.insertBefore(toolbar,input.parentElement);
+        const inlinePreview=document.createElement('div');inlinePreview.className='inline-text-preview';inlinePreview.setAttribute('aria-label','선택 굵게 적용 미리보기');box.append(inlinePreview);
+        function drawInlinePreview(){inlinePreview.replaceChildren();inlinePreview.hidden=!core.normalizeRanges(block.text,block.boldRanges).length;for(const part of core.textSegments(block.text,block.boldRanges)){if(part.bold){const strong=document.createElement('strong');strong.textContent=part.text;inlinePreview.append(strong);}else inlinePreview.append(document.createTextNode(part.text));}}
+        function applyInlineBold(){const start=input.selectionStart,end=input.selectionEnd;if(start===end){notify('먼저 내용에서 굵게 할 글자를 드래그해 선택하세요.');input.focus();return;}block.boldRanges=core.toggleBold(block.text,block.boldRanges,start,end);drawInlinePreview();preview();input.focus();input.setSelectionRange(start,end);}
+        boldButton.addEventListener('mousedown',e=>e.preventDefault());boldButton.addEventListener('click',applyInlineBold);
+        clearButton.addEventListener('click',()=>{block.boldRanges=[];drawInlinePreview();preview();input.focus();});
+        input.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='b'){e.preventDefault();applyInlineBold();}});
+        drawInlinePreview();
         const format=document.createElement('div');format.className='block-format';
         optionField(format,'정렬',block.align||(block.type==='quote'?'center':'left'),[['left','왼쪽'],['center','가운데'],['right','오른쪽']],v=>{block.align=v;preview();});
         optionField(format,'글자',block.bold?'bold':'normal',[['normal','기본'],['bold','굵게']],v=>{block.bold=v==='bold';preview();});

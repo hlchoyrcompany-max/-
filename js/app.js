@@ -21,13 +21,14 @@
         if(src)img.src=src;img.addEventListener('error',()=>{img.hidden=true;const warning=document.createElement('p');warning.textContent='이미지를 불러오지 못했습니다. 파일 경로를 확인해 주세요.';el.prepend(warning);},{once:true});el.append(img);
         if(block.caption){const caption=document.createElement('figcaption');caption.textContent=block.caption;el.append(caption);}
       }else if(['paragraph','heading','quote'].includes(block.type)){
-        el=document.createElement(block.type==='heading'?'h2':block.type==='quote'?'blockquote':'p');el.textContent=block.text||'';
+        el=document.createElement(block.type==='heading'?'h2':block.type==='quote'?'blockquote':'p');
+        for(const segment of core.textSegments(block.text,block.boldRanges)){if(segment.bold){const strong=document.createElement('strong');strong.textContent=segment.text;el.append(strong);}else el.append(document.createTextNode(segment.text));}
       }else continue;
       el.className='content-block '+block.type;
       if(['left','center','right'].includes(block.align))el.style.textAlign=block.align;
       if(block.bold===true)el.classList.add('text-bold');
       if(block.color==='red')el.classList.add('text-red');
-      if(block.highlight===true&&['paragraph','heading','quote'].includes(block.type)){el.classList.add('text-highlight');const mark=document.createElement('mark');mark.textContent=el.textContent;el.replaceChildren(mark);}
+      if(block.highlight===true&&['paragraph','heading','quote'].includes(block.type)){el.classList.add('text-highlight');const mark=document.createElement('mark');while(el.firstChild)mark.append(el.firstChild);el.append(mark);}
       if(['compact','wide'].includes(block.spacing))el.classList.add('spacing-'+block.spacing);
       fragment.append(el);
     }

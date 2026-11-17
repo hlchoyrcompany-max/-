@@ -66,3 +66,4 @@ body{background:#f5f6f5}.wrap{padding-bottom:85px}.blog-top{position:relative}.b
 .post-body .content-block.text-highlight mark{background:#fff25a;color:inherit;padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .post-body .content-block.spacing-compact{margin-bottom:18px}.post-body .content-block.spacing-wide{margin-bottom:80px}
 @media(max-width:480px){.post-body{padding-left:22px;padding-right:22px}.post-body .content-block{font-size:15px;line-height:1.9;margin-bottom:36px}.post-body .content-block.heading{font-size:18px}.post-body .content-block.quote{font-size:18px}.post-body .content-block.text-highlight{max-width:100%;margin-left:0}.post-body .content-block.spacing-wide{margin-bottom:64px}}
+.post-body .content-block strong{font-weight:700}
