@@ -15,8 +15,8 @@
     const ink=color('글자색','#e53935','foreColor');button('글자색 적용',()=>command('foreColor',ink.value));
     const marker=color('형광펜','#fff176','hiliteColor');button('형광펜 적용',()=>command('hiliteColor',marker.value));
     const size=document.createElement('select');size.setAttribute('aria-label','글자 크기');
-    for(const [value,label] of [['','글자 크기'],['2','14px'],['3','16px'],['4','18px'],['5','24px'],['6','32px'],['7','48px']]){const o=document.createElement('option');o.value=value;o.textContent=label;size.append(o);}
-    size.addEventListener('mousedown',remember);size.addEventListener('change',()=>{if(size.value)command('fontSize',size.value);size.value='';});toolbar.append(size);
+    for(const [value,label] of [['','글자 크기'],...['14','16','18','20','21','23','24','32','48'].map(px=>[px,px+'px'])]){const o=document.createElement('option');o.value=value;o.textContent=label;size.append(o);}
+    size.addEventListener('mousedown',remember);size.addEventListener('change',()=>{if(size.value){restore();document.execCommand('fontSize',false,'7');editor.querySelectorAll('font[size="7"]').forEach(font=>{font.style.fontSize=size.value+'px';font.removeAttribute('size');});remember();sync();}size.value='';});toolbar.append(size);
     for(const [label,cmd] of [['왼쪽','justifyLeft'],['가운데','justifyCenter'],['오른쪽','justifyRight'],['글머리표','insertUnorderedList'],['번호 목록','insertOrderedList']])button(label,()=>command(cmd));
     function insertQuote(kind){
       restore();const selection=window.getSelection();const quote=document.createElement('blockquote');quote.className='quote-'+kind;
