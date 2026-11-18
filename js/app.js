@@ -77,7 +77,7 @@
   byId('shareBottom').addEventListener('click',share);
   const menuSheet=byId('menuSheet');
   function closeMenu(){menuSheet.close();}
-  function menuLink(label,board){const a=document.createElement('a');a.textContent=label;a.href='board.html?board='+encodeURIComponent(board);return a;}
+  function menuLink(label,board){const a=document.createElement('a');a.textContent=label;a.href='index.html?board='+encodeURIComponent(board)+'#latest';return a;}
   function openMenu(kind){
     const body=byId('menuSheetBody');body.replaceChildren();
     if(kind==='topics'){

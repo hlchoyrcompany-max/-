@@ -85,3 +85,6 @@ body{background:#f5f6f5}.wrap{padding-bottom:85px}.blog-top{position:relative}.b
 #commentThreads .reader-comment-reply .reader-avatar{left:40px}
 #commentThreads .comment-author-badge{background:#e9faf2;border:0;color:#28ad79;border-radius:10px;font-size:10px;padding:2px 5px}
 #commentThreads .reader-reply-button{font-size:11px;border:0;background:transparent;color:#999;padding:4px 0}
+
+/* Keep the fixed navigation inside the same centered column as the article. */
+:root{--article-layout-width:860px}.wrap{max-width:var(--article-layout-width)}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:100%;max-width:var(--article-layout-width)}
