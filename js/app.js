@@ -65,7 +65,8 @@
     byId('commentsTitle').querySelector('span').textContent=shownCount.toLocaleString();
     byId('commentsStatus').hidden=total>0;
     byId('commentsStatus').textContent=shownCount>0?'댓글 내용은 아직 연결되지 않았습니다.':'아직 등록된 댓글이 없습니다.';
-    byId('commentsNotice').textContent=current.commentsAreExamples?'아래 '+total+'개는 작성자 답글을 포함한 화면 확인용 예시입니다. 실제 독자 후기나 치료 경험이 아닙니다.':'서버 댓글 작성 기능은 아직 연결되지 않았습니다.';
+    byId('commentsNotice').textContent=current.commentsAreExamples?'아래 '+total+'개는 작성자 답글을 포함한 화면 확인용 예시입니다. 실제 독자 후기나 치료 경험이 아닙니다.':'';
+    byId('commentsNotice').hidden=current.commentsAreExamples!==true;
     byId('commentNew').hidden=current.commentsNew!==true;
   }
   async function share(){
@@ -85,8 +86,8 @@
       text('menuSheetDescription','관심 있는 게시판으로 바로 이동하세요.');
       for(const board of ['전체글','인기글','자유게시판','후기','공지'])body.append(menuLink(board,board));
     }else{
-      text('menuSheetTitle','소식');text('menuSheetDescription','공지와 인기글을 빠르게 확인하세요.');
-      for(const [label,board] of [['공지사항','공지'],['인기글','인기글'],['최신 후기','후기'],['전체글','전체글']])body.append(menuLink(label,board));
+      text('menuSheetTitle','소식');text('menuSheetDescription','공지와 최신 후기를 확인하세요.');
+      for(const [label,board] of [['공지사항','공지'],['최신 후기','후기']])body.append(menuLink(label,board));
     }
     if(!menuSheet.open)menuSheet.showModal();
   }
