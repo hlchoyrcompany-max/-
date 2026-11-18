@@ -12,11 +12,11 @@
 :where(.rich-editor,.post-body) .quote-text{margin:0!important;white-space:pre-wrap}:where(.rich-editor,.post-body) cite.quote-source{display:block;margin-top:16px;font-family:"Malgun Gothic",sans-serif;font-size:12px;font-style:normal;color:#888}
 
 /* Enter creates one ordinary line; paragraph gaps are explicit blank lines. */
-.rich-editor,.post-body .content-block.rich-document{font-size:18px;line-height:1.85;letter-spacing:0;word-spacing:0;white-space:pre-wrap}
+.rich-editor,.post-body .content-block.rich-document{font-size:18px;line-height:1.6;letter-spacing:-0.5px;word-spacing:-0.5px;white-space:pre-wrap}
 .rich-editor p,.rich-editor div,.post-body .rich-document p,.post-body .rich-document div{margin-top:0!important;margin-bottom:0!important;line-height:inherit}
-.rich-editor p:empty,.rich-editor div:empty,.post-body .rich-document p:empty,.post-body .rich-document div:empty{min-height:1.85em}
+.rich-editor p:empty,.rich-editor div:empty,.post-body .rich-document p:empty,.post-body .rich-document div:empty{min-height:1.6em}
 
-.rich-editor blockquote.quote-large,.post-body blockquote.quote-large{font-family:"Nanum Myeongjo","Batang",serif;font-size:21px;font-style:italic;font-weight:400;letter-spacing:0;word-spacing:0;line-height:1.8}
+.rich-editor blockquote.quote-large,.post-body blockquote.quote-large{font-family:"Nanum Myeongjo","Batang",serif;font-size:21px;font-style:italic;font-weight:400;letter-spacing:-0.5px;word-spacing:-0.5px;line-height:1.6}
 :where(.rich-editor,.rich-document) u,:where(.rich-editor,.rich-document) [style*="text-decoration"]{text-decoration:none!important}
 :where(.rich-editor,.rich-document) .underline-run{ text-decoration-line:underline!important;text-decoration-color:currentColor!important;text-underline-offset:3px;text-decoration-thickness:1px}
 .rich-editor a:not(.link-card),.post-body .rich-document a:not(.link-card){color:#568fc1;text-decoration:underline;text-decoration-color:currentColor}
@@ -25,6 +25,6 @@
 .link-card .link-card-copy{display:flex;flex:1;min-width:0;flex-direction:column;justify-content:center;padding:16px 20px;gap:2px}.link-card .link-card-title{font-size:17px;font-weight:700;color:#111}.link-card .link-card-description{font-size:14px;color:#444}.link-card .link-card-domain{font-size:13px;color:#03a94d;overflow-wrap:anywhere}.link-card:hover{border-color:#aaa}
 @media(max-width:480px){.link-card .link-card-icon{flex-basis:72px;font-size:34px}.link-card .link-card-copy{padding:12px}.rich-editor blockquote.quote-large,.post-body blockquote.quote-large{font-size:21px}}
 
-.rich-editor .quote-large .quote-text,.post-body .quote-large .quote-text{font-weight:400;letter-spacing:0;line-height:1.8}.rich-editor .quote-large b,.rich-editor .quote-large strong,.post-body .quote-large b,.post-body .quote-large strong{font-weight:700}
+.rich-editor .quote-large .quote-text,.post-body .quote-large .quote-text{font-weight:400;letter-spacing:-0.5px;word-spacing:-0.5px;line-height:1.6}.rich-editor .quote-large b,.rich-editor .quote-large strong,.post-body .quote-large b,.post-body .quote-large strong{font-weight:700}
 
 .rich-editor p,.post-body .rich-document p{font-size:inherit;letter-spacing:inherit;word-spacing:inherit}
