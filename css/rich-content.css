@@ -29,7 +29,7 @@
 
 .rich-editor p,.post-body .rich-document p{font-size:inherit;letter-spacing:inherit;word-spacing:inherit}
 
-.rich-editor a.link-card.product-card,.post-body a.link-card.product-card{display:flex;flex-direction:column;max-width:400px;border-radius:10px;overflow:hidden;box-shadow:none;letter-spacing:0;word-spacing:0;text-align:left}
-.rich-editor .product-card>img,.post-body .product-card>img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#f7f7f7;margin:0!important;border-radius:0}
-.product-card .link-card-copy{padding:12px 14px;gap:6px}.product-card .link-card-title{font-size:16px;line-height:1.45}.product-card .link-card-description{font-size:13px;line-height:1.6;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}.product-card .link-card-domain{font-size:12px;line-height:1.5}
-@media(max-width:480px){.product-card .link-card-copy{padding:10px 12px}.product-card .link-card-title{font-size:15px}.product-card .link-card-description{font-size:12px}.rich-editor .product-card>img,.post-body .product-card>img{height:auto;aspect-ratio:16/9}}
+.rich-editor a.link-card.product-card,.post-body a.link-card.product-card{display:flex;flex-direction:column;max-width:400px;border-radius:0;overflow:hidden;box-shadow:0 1px 4px #00000018;letter-spacing:0;word-spacing:0;text-align:left}
+.rich-editor .product-card>img,.post-body .product-card>img{display:block;width:100%;height:auto;aspect-ratio:5/3;object-fit:cover;background:#f7f7f7;margin:0!important;border-radius:0}
+.product-card .link-card-copy{padding:12px 14px;gap:6px}.product-card .link-card-title{font-size:16px;line-height:1.45}.product-card .link-card-description{font-size:13px;line-height:1.6;display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.product-card .link-card-domain{font-size:12px;line-height:1.5}
+@media(max-width:480px){.product-card .link-card-copy{padding:10px 12px}.product-card .link-card-title{font-size:15px}.product-card .link-card-description{font-size:12px}.rich-editor .product-card>img,.post-body .product-card>img{height:auto;aspect-ratio:5/3}}
