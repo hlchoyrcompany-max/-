@@ -1,10 +1,10 @@
-/* 오늘의 기록 블로그 데이터 — editor.html에서 편집 */
+/* 블로그 데이터 — editor.html에서 편집 */
 window.BLOG_DATA = {
   "site": {
     "name": "달콤라떼",
     "author": "달콤라떼",
     "profileDescription": "",
-    "bannerImage": "",
+    "bannerImage": "assets/images/cover.jpg",
     "homeUrl": ""
   },
   "posts": [
