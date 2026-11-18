@@ -88,3 +88,15 @@ body{background:#f5f6f5}.wrap{padding-bottom:85px}.blog-top{position:relative}.b
 
 /* Keep the fixed navigation inside the same centered column as the article. */
 :root{--article-layout-width:860px}.wrap{max-width:var(--article-layout-width)}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:100%;max-width:var(--article-layout-width)}
+
+/* Compact navigation and topic/news sheets on desktop and mobile. */
+.wrap{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+.bottom-nav{min-height:60px;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
+.bottom-nav .bn-item{min-height:46px;padding:2px 6px;gap:3px;font-size:12px}
+.bottom-nav .bn-item .ico{width:22px;height:22px;font-size:22px}.bottom-nav .bn-item .ico svg{width:22px;height:22px}
+.menu-sheet{width:min(calc(100% - 32px),480px);max-height:75vh;border-radius:18px 18px 0 0;padding:12px 16px calc(16px + env(safe-area-inset-bottom))}
+.menu-sheet-handle{width:40px;height:4px;margin:0 auto 10px}
+.menu-sheet-head{margin-bottom:2px;gap:12px}.menu-sheet h2{font-size:19px;line-height:1.4}.menu-sheet-head button{width:36px;height:36px;font-size:25px}
+.menu-sheet p.menu-sheet-description{font-size:13px;line-height:1.6;margin:0 0 12px}
+.menu-sheet #menuSheetBody>a{border-radius:10px;padding:12px 14px;margin:0 0 8px;min-height:46px;font-size:16px;line-height:1.4}
+.menu-sheet #menuSheetBody>a:last-child{margin-bottom:0}
