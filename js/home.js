@@ -2,7 +2,7 @@
   'use strict';
   const data=window.BLOG_DATA||{site:{},posts:[]};const core=window.BlogCore;const site=data.site;const $=id=>document.getElementById(id);let limit=6,query='',active='전체글';
   if(location.hash==='#comments'){location.replace('post.html#comments');return;}
-  document.querySelectorAll('[data-site-name]').forEach(el=>el.textContent=site.name||'오늘의 기록');document.title=site.name||'오늘의 기록';$('profileDescription').textContent=site.profileDescription||'';$('profileOwner').textContent=site.author||'기록하는 사람';document.querySelector('.profile-avatar').textContent=(site.author||'기').slice(0,1);if($('copyrightYear'))$('copyrightYear').textContent=new Date().getFullYear();
+  document.querySelectorAll('[data-site-name]').forEach(el=>el.textContent=site.name||'오늘의 기록');document.title=site.name||'오늘의 기록';document.querySelector('.profile-avatar').textContent=(site.author||'기').slice(0,1);if($('copyrightYear'))$('copyrightYear').textContent=new Date().getFullYear();
   document.querySelector('meta[name=description]').content=site.profileDescription||'';document.querySelector('meta[property="og:title"]').content=site.name||'';document.querySelector('meta[property="og:description"]').content=site.profileDescription||'';
   const banner=window.LandingCore.imageUrl(site.bannerImage);if(banner){$('heroImage').src=banner;$('heroImage').hidden=false;$('heroImage').addEventListener('error',()=>$('heroImage').hidden=true);}
   function empty(parent,message){const p=document.createElement('p');p.className='empty-state';p.textContent=message;parent.append(p);}
