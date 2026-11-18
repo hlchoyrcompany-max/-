@@ -31,7 +31,7 @@
       if(node.tagName==='DIV'&&node.className==='quote-text')el.className='quote-text';
       if(node.tagName==='CITE')el.className='quote-source';
       if(node.tagName==='SPAN'&&['underline-run','link-card-icon','link-card-copy','link-card-title','link-card-description','link-card-domain'].includes(node.className))el.className=node.className;
-      if(node.tagName==='A'&&node.className==='link-card')el.className='link-card';
+      if(node.tagName==='A'&&node.classList.contains('link-card'))el.className=node.classList.contains('product-card')?'link-card product-card':'link-card';
       for(const prop of ['color','backgroundColor'])if(colors.test(node.style[prop]))el.style[prop]=node.style[prop];
       if(['left','center','right'].includes(node.style.textAlign))el.style.textAlign=node.style.textAlign;
       if(/^(bold|normal|[1-9]00)$/.test(node.style.fontWeight))el.style.fontWeight=node.style.fontWeight;
