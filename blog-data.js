@@ -1,7 +1,7 @@
-/* sweetlatte1117 블로그 데이터 — editor.html에서 편집 */
+/* 오늘의 기록 블로그 데이터 — editor.html에서 편집 */
 window.BLOG_DATA = {
   "site": {
-    "name": "sweetlatte1117",
+    "name": "오늘의 기록",
     "author": "달콤라떼",
     "profileDescription": "일상 속 작은 순간을 기록합니다.",
     "bannerImage": "",
@@ -21,7 +21,7 @@ window.BLOG_DATA = {
         "원고",
         "검토 중"
       ],
-      "published": true,
+      "published": false,
       "featured": false,
       "updatedAt": "2026-11-17T14:30:00+09:00",
       "blocks": [
@@ -248,7 +248,7 @@ window.BLOG_DATA = {
         "일상",
         "기록"
       ],
-      "published": true,
+      "published": false,
       "featured": false,
       "updatedAt": "2026-11-17T00:00:00+09:00",
       "blocks": [
