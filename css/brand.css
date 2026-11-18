@@ -110,4 +110,4 @@ body{background:#f5f6f5}.wrap{padding-bottom:85px}.blog-top{position:relative}.b
 .bottom-nav #newsNav .ico{font-family:Arial,sans-serif;font-variant-emoji:text;font-weight:400;color:#686868;line-height:1}
 
 /* Fixed heart outline avoids Samsung/Apple emoji and font substitution. */
-.bottom-nav #newsNav .ico{color:#686868}.bottom-nav #newsNav .ico svg{width:22px;height:24px;display:block;flex-shrink:0}
+.bottom-nav #newsNav .ico{color:#686868}.bottom-nav #newsNav .ico svg{width:20px;height:20px;display:block;flex-shrink:0}
