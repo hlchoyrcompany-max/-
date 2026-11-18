@@ -84,7 +84,7 @@
     if(kind==='topics'){
       text('menuSheetTitle','주제 보기');
       text('menuSheetDescription','관심 있는 게시판으로 바로 이동하세요.');
-      for(const board of ['전체글','인기글','자유게시판','후기','공지'])body.append(menuLink(board,board));
+      for(const board of ['전체글','인기글','자유게시판'])body.append(menuLink(board,board));
     }else{
       text('menuSheetTitle','소식');text('menuSheetDescription','공지와 최신 후기를 확인하세요.');
       for(const [label,board] of [['공지사항','공지'],['최신 후기','후기']])body.append(menuLink(label,board));
