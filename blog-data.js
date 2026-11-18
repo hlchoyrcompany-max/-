@@ -1,4 +1,4 @@
-/* 오늘의 기록 블로그 데이터 — editor.html에서 편집 */
+/* 블로그 데이터 — editor.html에서 편집 */
 window.BLOG_DATA = {
   "site": {
     "name": "달콤라떼",
@@ -21,7 +21,7 @@ window.BLOG_DATA = {
         "원고",
         "검토 중"
       ],
-      "published": false,
+      "published": true,
       "featured": false,
       "updatedAt": "2026-11-17T14:30:00+09:00",
       "blocks": [
@@ -233,7 +233,8 @@ window.BLOG_DATA = {
           "replies": []
         }
       ],
-      "slug": "JL3jZVy984sIQ2127drz"
+      "slug": "JL3jZVy984sIQ2127drz",
+      "hideFromHome": true
     }
   ]
 };
